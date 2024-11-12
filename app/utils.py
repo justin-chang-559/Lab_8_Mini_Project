@@ -1,9 +1,4 @@
 import csv
-from app import db
-from app.models import Course, User, Enrollment
-import os
-
-import csv
 import os
 from app import db
 from app.models import Course, User, Enrollment
@@ -26,13 +21,6 @@ def import_enrollment_data(file_path):
                 print(f"Skipping incomplete row: {row}")
                 continue
 
-            # Get or create the course
-            course_name = row['Class Name'].strip()
-            course = Course.query.filter_by(name=course_name).first()
-            if not course:
-                course = Course(name=course_name, capacity=int(row['Capacity']))
-                db.session.add(course)
-
             # Get or create the teacher
             teacher_name = row['Teacher Name'].strip()
             teacher = User.query.filter_by(username=teacher_name).first()
@@ -41,11 +29,20 @@ def import_enrollment_data(file_path):
                 teacher = User(username=teacher_name, email=teacher_email, password_hash=hashed_default_password, role='teacher')
                 db.session.add(teacher)
             elif not teacher.email or not teacher.password_hash:
-                # Update existing teacher with default email or password if missing
                 if not teacher.email:
                     teacher.email = f"{teacher_name.replace(' ', '').lower()}@example.com"
                 if not teacher.password_hash:
                     teacher.password_hash = hashed_default_password
+
+            # Get or create the course and assign the teacher
+            course_name = row['Class Name'].strip()
+            course = Course.query.filter_by(name=course_name).first()
+            if not course:
+                course = Course(name=course_name, capacity=int(row['Capacity']), teacher=teacher)
+                db.session.add(course)
+            elif course.teacher_id != teacher.id:
+                print(f"Skipping course '{course_name}' as it is already assigned to another teacher.")
+                continue  # Skip this course if it's already assigned to another teacher
 
             # Get or create the student
             student_name = row['Student Name'].strip()
@@ -55,7 +52,6 @@ def import_enrollment_data(file_path):
                 student = User(username=student_name, email=student_email, password_hash=hashed_default_password, role='student')
                 db.session.add(student)
             elif not student.email or not student.password_hash:
-                # Update existing student with default email or password if missing
                 if not student.email:
                     student.email = f"{student_name.replace(' ', '').lower()}@example.com"
                 if not student.password_hash:

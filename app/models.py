@@ -19,15 +19,18 @@ class User(UserMixin, db.Model):
     def __repr__(self):
         return f'<User {self.username}>'
 
+# In models.py
 class Course(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(120), index=True, unique=True, nullable=False)
     capacity = db.Column(db.Integer, nullable=False)
-    # Ensure a unique backref name that doesn't conflict
+    teacher_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)  # Link to the teacher
+    teacher = db.relationship('User', backref='courses')  # Backref to access courses taught by the teacher
     enrollments = db.relationship('Enrollment', back_populates='course', lazy='dynamic')
 
     def __repr__(self):
         return f'<Course {self.name}>'
+
 
 class Enrollment(db.Model):
     id = db.Column(db.Integer, primary_key=True)

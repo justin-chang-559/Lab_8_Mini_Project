@@ -79,22 +79,30 @@ def init_routes(app):
     @app.route('/teacher/classes')
     @login_required
     def teacher_classes():
-        enrollments = Enrollment.query.join(Course).filter_by(name=current_user.username).all()
-        return render_template('teacher/classes.html', enrollments=enrollments)
+        # Only show courses where the logged-in user is the teacher
+        courses = Course.query.filter_by(teacher_id=current_user.id).all()
+        return render_template('teacher/classes.html', courses=courses)
 
-    @app.route('/teacher/students/<course_id>', methods=['GET', 'POST'])
+    @app.route('/teacher/students/<int:course_id>', methods=['GET', 'POST'])
     @login_required
     def teacher_students(course_id):
-        course = Course.query.get(course_id)
+        # Ensure the course is taught by the current teacher
+        course = Course.query.filter_by(id=course_id, teacher_id=current_user.id).first_or_404()
+
         if request.method == 'POST':
+            # Update grades for students in the course
             for student_id, grade in request.form.items():
                 if student_id != 'course_id':
                     enrollment = Enrollment.query.filter_by(student_id=student_id, course_id=course_id).first()
                     if enrollment:
-                        enrollment.grade = grade
+                        enrollment.grade = float(grade)
                         db.session.commit()
             flash('Grades updated successfully.')
-        return render_template('teacher/students.html', course=course)
+            return redirect(url_for('teacher_students', course_id=course_id))
+
+        # Fetch all students enrolled in the course
+        enrollments = Enrollment.query.filter_by(course_id=course_id).all()
+        return render_template('teacher/students.html', course=course, enrollments=enrollments)
 
     @app.route('/admin')
     @login_required
