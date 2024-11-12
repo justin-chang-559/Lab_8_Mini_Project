@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>Admin Dashboard</h1>
+  <h2>Users</h2>
+  <ul>
+    {% for user in users %}
+      <li>{{ user.username }} ({{ user.role }})</li>
+    {% endfor %}
+  </ul>
+  <h2>Courses</h2>
+  <ul>
+    {% for course in courses %}
+      <li>{{ course.name }} (Capacity: {{ course.capacity }})</li>
+    {% endfor %}
+  </ul>
+  <h2>Enrollments</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Student</th>
+        <th>Course</th>
+        <th>Grade</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for enrollment in enrollments %}
+        <tr>
+          <td>{{ enrollment.student.username }}</td>
+          <td>{{ enrollment.course.name }}</td>
+          <td>{{ enrollment.grade }}</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}

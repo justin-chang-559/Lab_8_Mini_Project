@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>Students in {{ course.name }}</h1>
+  <form method="post">
+    <input type="hidden" name="course_id" value="{{ course.id }}">
+    <table>
+      <thead>
+        <tr>
+          <th>Student</th>
+          <th>Grade</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for enrollment in course.enrollments %}
+          <tr>
+            <td>{{ enrollment.student.username }}</td>
+            <td><input type="number" name="{{ enrollment.student_id }}" value="{{ enrollment.grade }}"></td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    <button type="submit">Update Grades</button>
+  </form>
+{% endblock %}

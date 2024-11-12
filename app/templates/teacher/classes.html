@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>Your Classes</h1>
+  <ul>
+    {% for enrollment in enrollments %}
+      <li><a href="{{ url_for('teacher_students', course_id=enrollment.course_id) }}">{{ enrollment.course.name }}</a></li>
+    {% endfor %}
+  </ul>
+{% endblock %}

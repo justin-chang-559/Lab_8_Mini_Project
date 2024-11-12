@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Enroll in a Course</h1>
+
+<form method="post">
+    <label for="course">Course:</label>
+    <select name="course_id" id="course" required>
+        {% for course in courses %}
+            <option value="{{ course.id }}">{{ course.name }}</option>
+        {% endfor %}
+    </select>
+    <button type="submit" name="action" value="enroll">Enroll</button>
+    <button type="submit" name="action" value="drop">Drop</button>
+</form>
+
+<h2>Available Courses</h2>
+<ul>
+    {% for course in courses %}
+        <li>
+            <strong>{{ course.name }}</strong> - Capacity: {{ course.capacity }} - Enrolled: {{ course.enrollments.count() }}
+            {% if course.id in enrolled_courses %}
+                <!-- Show Drop Button -->
+                <form method="post" style="display:inline;">
+                    <input type="hidden" name="course_id" value="{{ course.id }}">
+                    <button type="submit" name="action" value="drop">Drop</button>
+                </form>
+            {% elif course.enrollments.count() < course.capacity %}
+                <!-- Show Enroll Button -->
+                <form method="post" style="display:inline;">
+                    <input type="hidden" name="course_id" value="{{ course.id }}">
+                    <button type="submit" name="action" value="enroll">Enroll</button>
+                </form>
+            {% else %}
+                <em>Full</em>
+            {% endif %}
+        </li>
+    {% endfor %}
+</ul>
+{% endblock %}

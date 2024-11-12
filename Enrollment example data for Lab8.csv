@@ -1,0 +1,18 @@
+﻿Class Name,Teacher Name,Time,Capacity,Student Name,Grade
+Math 101,Ralph Jenkins,MWF 10:00-10:50 AM,8,Jose Santos,92
+Math 101,Ralph Jenkins,MWF 10:00-10:50 AM,8,Betty Brown,65
+Math 101,Ralph Jenkins,MWF 10:00-10:50 AM,8,John Stuart,86
+Math 101,Ralph Jenkins,MWF 10:00-10:50 AM,8,Li Cheng,77
+Physics 121,Susan Walker,TR 11:00-11:50 AM,10,Nancy Little,53
+Physics 121,Susan Walker,TR 11:00-11:50 AM,10,Li Cheng,85
+Physics 121,Susan Walker,TR 11:00-11:50 AM,10,Mindy Norris,94
+Physics 121,Susan Walker,TR 11:00-11:50 AM,10,John Stuart,91
+Physics 121,Susan Walker,TR 11:00-11:50 AM,10,Betty Brown,88
+CS 106,Ammon Hepworth,MWF 2:00-2:50 PM,10,Aditya Ranganath,93
+CS 106,Ammon Hepworth,MWF 2:00-2:50 PM,10,Yi Wen Chen,85
+CS 106,Ammon Hepworth,MWF 2:00-2:50 PM,10,Nancy Little,57
+CS 106,Ammon Hepworth,MWF 2:00-2:50 PM,10,Mindy Norris,68
+CS 162,Ammon Hepworth,TR 3:00-3:50 PM,4,Aditya Ranganath,99
+CS 162,Ammon Hepworth,TR 3:00-3:50 PM,4,Nancy Little,87
+CS 162,Ammon Hepworth,TR 3:00-3:50 PM,4,Yi Wen Chen,92
+CS 162,Ammon Hepworth,TR 3:00-3:50 PM,4,John Stuart,67
