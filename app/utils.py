@@ -65,3 +65,16 @@ def import_enrollment_data(file_path):
                 db.session.add(enrollment)
 
     db.session.commit()
+
+def create_admin_account():
+    # Check if the admin user already exists
+    admin_user = User.query.filter_by(username='admin').first()
+    if not admin_user:
+        # Create the admin user with the specified username and password
+        admin_password = generate_password_hash('admin123')
+        admin_user = User(username='admin', email='admin@example.com', password_hash=admin_password, role='admin')
+        db.session.add(admin_user)
+        db.session.commit()
+        print("Admin account created: username='admin', password='admin123'")
+    else:
+        print("Admin account already exists.")

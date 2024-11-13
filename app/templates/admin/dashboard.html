@@ -1,36 +1,98 @@
+{# admin/dashboard.html #}
 {% extends 'base.html' %}
 
 {% block content %}
-  <h1>Admin Dashboard</h1>
-  <h2>Users</h2>
-  <ul>
-    {% for user in users %}
-      <li>{{ user.username }} ({{ user.role }})</li>
-    {% endfor %}
-  </ul>
-  <h2>Courses</h2>
-  <ul>
-    {% for course in courses %}
-      <li>{{ course.name }} (Capacity: {{ course.capacity }})</li>
-    {% endfor %}
-  </ul>
-  <h2>Enrollments</h2>
-  <table>
-    <thead>
-      <tr>
-        <th>Student</th>
-        <th>Course</th>
-        <th>Grade</th>
-      </tr>
-    </thead>
-    <tbody>
-      {% for enrollment in enrollments %}
-        <tr>
-          <td>{{ enrollment.student.username }}</td>
-          <td>{{ enrollment.course.name }}</td>
-          <td>{{ enrollment.grade }}</td>
-        </tr>
-      {% endfor %}
-    </tbody>
-  </table>
+<div class="dashboard">
+    <h1>Admin Dashboard</h1>
+    
+    <section class="users-section">
+        <h2>Users</h2>
+        <a href="{{ url_for('admin_new_user') }}" class="btn">Add New User</a>
+        <table>
+            <thead>
+                <tr>
+                    <th>Username</th>
+                    <th>Email</th>
+                    <th>Role</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for user in users %}
+                <tr>
+                    <td>{{ user.username }}</td>
+                    <td>{{ user.email }}</td>
+                    <td>{{ user.role }}</td>
+                    <td>
+                        <a href="{{ url_for('admin_edit_user', user_id=user.id) }}">Edit</a>
+                        <form action="{{ url_for('admin_delete_user', user_id=user.id) }}" method="POST" style="display: inline;">
+                            <button type="submit" onclick="return confirm('Are you sure?')">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </section>
+
+    <section class="courses-section">
+        <h2>Courses</h2>
+        <a href="{{ url_for('admin_new_course') }}" class="btn">Add New Course</a>
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Capacity</th>
+                    <th>Teacher</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for course in courses %}
+                <tr>
+                    <td>{{ course.name }}</td>
+                    <td>{{ course.capacity }}</td>
+                    <td>{{ course.teacher.username if course.teacher else 'No Teacher' }}</td>
+                    <td>
+                        <a href="{{ url_for('admin_edit_course', course_id=course.id) }}">Edit</a>
+                        <form action="{{ url_for('admin_delete_course', course_id=course.id) }}" method="POST" style="display: inline;">
+                            <button type="submit" onclick="return confirm('Are you sure?')">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </section>
+
+    <section class="enrollments-section">
+        <h2>Enrollments</h2>
+        <a href="{{ url_for('admin_new_enrollment') }}" class="btn">Add New Enrollment</a>
+        <table>
+            <thead>
+                <tr>
+                    <th>Student</th>
+                    <th>Course</th>
+                    <th>Grade</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for enrollment in enrollments %}
+                <tr>
+                    <td>{{ enrollment.student.username }}</td>
+                    <td>{{ enrollment.course.name }}</td>
+                    <td>{{ enrollment.grade if enrollment.grade else 'Not graded' }}</td>
+                    <td>
+                        <a href="{{ url_for('admin_edit_enrollment', enrollment_id=enrollment.id) }}">Edit</a>
+                        <form action="{{ url_for('admin_delete_enrollment', enrollment_id=enrollment.id) }}" method="POST" style="display: inline;">
+                            <button type="submit" onclick="return confirm('Are you sure?')">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </section>
+</div>
 {% endblock %}
