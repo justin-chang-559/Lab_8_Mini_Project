@@ -1,0 +1,108 @@
+body {
+    font-family: Arial, sans-serif;
+    font-size: 120%;
+    background-color: #ffffff;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+header {
+    padding: 1em;
+}
+h1 {
+    color: rgb(0, 0, 0);
+    text-align: center;
+}
+
+/* button */
+button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    border-radius: 4px;
+}
+button:hover {
+    opacity: 0.8;
+}
+
+/* link */
+nav ul {
+    list-style-type: none;
+    text-align: right;
+    padding: 0;
+}
+nav ul li {
+    display: inline;
+    margin-right: 10px;
+    margin-left: 10px;
+}
+nav ul li a {
+    text-decoration: none;
+    color: #4c57af;
+}
+
+/* section */
+section {
+    margin: 20px;
+    padding: 40px;
+    background-color: rgb(205, 212, 241);
+    border-radius: 8px;
+}
+
+/* flashes */
+.flashes {
+    background-color: #f4f4f4; 
+    border: 1px solid #bdcedf; 
+    border-radius: 5px; 
+    padding: 10px; 
+    margin: 20px 0; 
+    list-style: none; 
+    box-shadow: 0 4px 6px rgba(205, 212, 241);
+}
+.flashes li {
+    color: #495057;
+    font-size: 14px; 
+    padding: 5px 0;
+}
+.flashes li:last-child {
+    border-bottom: none;
+}
+
+/* Course Table */
+.course-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    background-color: #f7f9ff;
+    table-layout: fixed; 
+}
+.course-table th {
+    background-color: #4a6fa5;
+    color: white;
+    font-weight: bold;
+    padding: 12px 15px;
+}
+.course-table td {
+    padding: 12px 15px;
+    text-align: center;
+    border: 1px solid rgb(209, 201, 219)
+}
+.course-table tbody tr:hover {
+    background-color: #d4d4d4;
+}
+.course-table button {
+    padding: 5px 10px;
+    background-color: #4caf50;
+    color: white;
+    border-radius: 5px;
+    font-size: 14px;
+}
+.course-table button[name="action"][value="drop"] {
+    background-color: #f44336;
+}
+.course-table button:hover {
+    opacity: 0.8;
+}
+

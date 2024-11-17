@@ -2,7 +2,7 @@
 <html>
   <head>
     <title>Student Enrollment App</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='base.css') }}">
     <script src="{{ url_for('static', filename='js/app.js') }}"></script>
   </head>
   <body>
@@ -28,7 +28,9 @@
           </ul>
         {% endif %}
       {% endwith %}
-      {% block content %}{% endblock %}
+      <section class="main-content">
+        {% block content %}{% endblock %}
+      </section>
     </main>
     <footer>
       <p>&copy; 2023 Student Enrollment App</p>
