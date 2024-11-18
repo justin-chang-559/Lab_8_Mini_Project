@@ -42,6 +42,10 @@ nav ul li a {
     text-decoration: none;
     color: #4c57af;
 }
+a {
+    text-decoration: none;
+    color: #46395d;
+}
 
 /* section */
 section {
@@ -87,7 +91,7 @@ section {
 .course-table td {
     padding: 12px 15px;
     text-align: center;
-    border: 1px solid rgb(209, 201, 219)
+    border: 1px solid rgb(209, 201, 219);
 }
 .course-table tbody tr:hover {
     background-color: #d4d4d4;
@@ -106,3 +110,6 @@ section {
     opacity: 0.8;
 }
 
+.merge {
+    border-right: none; /* 오른쪽 테두리 제거 */
+}

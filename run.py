@@ -10,4 +10,6 @@ if __name__ == '__main__':
         import_enrollment_data('Enrollment example data for Lab8.csv')
         create_admin_account()
   
-    app.run()
+    app.run(port=5002, debug=True)  
+
+# defaultpassword

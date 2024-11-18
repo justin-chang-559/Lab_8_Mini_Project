@@ -9,7 +9,7 @@ def import_enrollment_data(file_path):
         raise FileNotFoundError(f"The file {file_path} does not exist.")
         
     default_password = "defaultpassword"  # Define a default password for new users
-    hashed_default_password = generate_password_hash(default_password)  # Hash the default password
+    hashed_default_password = generate_password_hash(default_password, method='pbkdf2:sha256')
 
     with open(file_path, 'r', encoding='utf-8-sig') as file:
         reader = csv.DictReader(file)
