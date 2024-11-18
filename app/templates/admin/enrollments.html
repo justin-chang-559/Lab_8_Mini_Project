@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Manage Enrollments</h1>
+<table>
+    <thead>
+        <tr>
+            <th>Student</th>
+            <th>Course</th>
+            <th>Grade</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for enrollment in enrollments %}
+        <tr>
+            <td>{{ enrollment.student.username }}</td>
+            <td>{{ enrollment.course.name }}</td>
+            <td>{{ enrollment.grade or 'N/A' }}</td>
+            <td>
+                <a href="{{ url_for('admin_edit_enrollment', enrollment_id=enrollment.id) }}">Edit</a>
+                <form action="{{ url_for('admin_delete_enrollment', enrollment_id=enrollment.id) }}" method="post" style="display:inline;">
+                    <button type="submit" onclick="return confirm('Are you sure you want to delete this enrollment?');">Delete</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<a href="{{ url_for('admin_new_enrollment') }}">Add New Enrollment</a>
+{% endblock %}

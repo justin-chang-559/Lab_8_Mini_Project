@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Edit Enrollment</h1>
+<form method="post">
+    <label for="student_id">Student:</label>
+    <select id="student_id" name="student_id" required>
+        {% for student in students %}
+        <option value="{{ student.id }}" {% if enrollment.student_id == student.id %}selected{% endif %}>
+            {{ student.username }}
+        </option>
+        {% endfor %}
+    </select>
+
+    <label for="course_id">Course:</label>
+    <select id="course_id" name="course_id" required>
+        {% for course in courses %}
+        <option value="{{ course.id }}" {% if enrollment.course_id == course.id %}selected{% endif %}>
+            {{ course.name }}
+        </option>
+        {% endfor %}
+    </select>
+
+    <label for="grade">Grade:</label>
+    <input type="number" id="grade" name="grade" value="{{ enrollment.grade or '' }}" step="0.01" min="0" max="100">
+
+    <button type="submit">Update Enrollment</button>
+</form>
+{% endblock %}

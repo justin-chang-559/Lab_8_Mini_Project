@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Edit User</h1>
+<form method="post">
+    <label for="username">Username:</label>
+    <input type="text" id="username" name="username" value="{{ user.username }}" required>
+
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email" value="{{ user.email }}" required>
+
+    <label for="role">Role:</label>
+    <select id="role" name="role" required>
+        <option value="student" {% if user.role == 'student' %}selected{% endif %}>Student</option>
+        <option value="teacher" {% if user.role == 'teacher' %}selected{% endif %}>Teacher</option>
+        <option value="admin" {% if user.role == 'admin' %}selected{% endif %}>Admin</option>
+    </select>
+
+    <button type="submit">Update User</button>
+</form>
+{% endblock %}
