@@ -24,7 +24,7 @@
                     <td>{{ user.email }}</td>
                     <td>{{ user.role }}</td>
                     <td>
-                        <a href="{{ url_for('admin_edit_user', user_id=user.id) }}">Edit</a>
+                        <a href="{{ url_for('admin_edit_user', user_id=user.id) }}" class="action-button">Edit</a>
                         <form action="{{ url_for('admin_delete_user', user_id=user.id) }}" method="POST" style="display: inline;">
                             <button type="submit" onclick="return confirm('Are you sure?')">Delete</button>
                         </form>
@@ -54,7 +54,7 @@
                     <td>{{ course.capacity }}</td>
                     <td>{{ course.teacher.username if course.teacher else 'No Teacher' }}</td>
                     <td>
-                        <a href="{{ url_for('admin_edit_course', course_id=course.id) }}">Edit</a>
+                        <a href="{{ url_for('admin_edit_course', course_id=course.id) }}" class="action-button">Edit</a>
                         <form action="{{ url_for('admin_delete_course', course_id=course.id) }}" method="POST" style="display: inline;">
                             <button type="submit" onclick="return confirm('Are you sure?')">Delete</button>
                         </form>
@@ -84,7 +84,7 @@
                     <td>{{ enrollment.course.name }}</td>
                     <td>{{ enrollment.grade if enrollment.grade else 'Not graded' }}</td>
                     <td>
-                        <a href="{{ url_for('admin_edit_enrollment', enrollment_id=enrollment.id) }}">Edit</a>
+                        <a href="{{ url_for('admin_edit_enrollment', enrollment_id=enrollment.id) }}" class="action-button">Edit</a>
                         <form action="{{ url_for('admin_delete_enrollment', enrollment_id=enrollment.id) }}" method="POST" style="display: inline;">
                             <button type="submit" onclick="return confirm('Are you sure?')">Delete</button>
                         </form>
