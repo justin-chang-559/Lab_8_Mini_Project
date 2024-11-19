@@ -1,13 +1,28 @@
 {% extends 'base.html' %}
 
 {% block content %}
-  <h1>Your Courses</h1>
-  <a href="{{ url_for('student_enroll') }}">Enroll in a Course</a>
-  <table>
-    <tr>
-      {% for course in courses %}
-        <td>{{ course.name }}</td>
-      {% endfor %}
-    </tr>
-  </table>
+<h1>Your Courses</h1>
+<table>
+    <thead>
+        <tr>
+            <th>Course Name</th>
+            <th>Teacher</th>
+            <th>Meeting Time</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for course in courses %}
+        <tr>
+            <td>{{ course.name }}</td>
+            <td>{{ course.teacher.username }}</td>
+            <td>{{ course.meeting_time }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<!-- Add a button to navigate to the enroll page -->
+<div style="margin-top: 1rem;">
+    <a href="{{ url_for('student_enroll') }}" class="action-button">Enroll in a Course</a>
+</div>
 {% endblock %}

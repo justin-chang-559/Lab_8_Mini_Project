@@ -18,6 +18,9 @@
         {% endfor %}
     </select>
 
+    <label for="meeting_time">Meeting Time:</label>
+    <input type="text" id="meeting_time" name="meeting_time" value="{{ course.meeting_time }}" placeholder="e.g., MWF 10:00-10:50 AM" required>
+
     <button type="submit">Update Course</button>
 </form>
 {% endblock %}

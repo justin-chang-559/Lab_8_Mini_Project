@@ -44,6 +44,7 @@ def init_routes(app):
         courses = [e.course for e in enrollments]
         return render_template('student/courses.html', courses=courses)
 
+
     @app.route('/student/enroll', methods=['GET', 'POST'])
     @login_required
     def student_enroll():
@@ -196,35 +197,41 @@ def init_routes(app):
     @app.route('/admin/courses/new', methods=['GET', 'POST'])
     @login_required
     def admin_new_course():
-        if admin_required(): return admin_required()
+        if current_user.role != 'admin':
+            return redirect(url_for('index'))
         teachers = User.query.filter_by(role='teacher').all()
         if request.method == 'POST':
             name = request.form['name']
             capacity = int(request.form['capacity'])
             teacher_id = int(request.form['teacher_id'])
+            meeting_time = request.form['meeting_time']  # Fetch meeting time from form
             
-            new_course = Course(name=name, capacity=capacity, teacher_id=teacher_id)
+            new_course = Course(name=name, capacity=capacity, teacher_id=teacher_id, meeting_time=meeting_time)
             db.session.add(new_course)
             db.session.commit()
             flash('Course created successfully.')
             return redirect(url_for('admin_courses'))
         return render_template('admin/new_course.html', teachers=teachers)
 
+
     # Edit a course
     @app.route('/admin/courses/edit/<int:course_id>', methods=['GET', 'POST'])
     @login_required
     def admin_edit_course(course_id):
-        if admin_required(): return admin_required()
+        if current_user.role != 'admin':
+            return redirect(url_for('index'))
         course = Course.query.get_or_404(course_id)
         teachers = User.query.filter_by(role='teacher').all()
         if request.method == 'POST':
             course.name = request.form['name']
             course.capacity = int(request.form['capacity'])
             course.teacher_id = int(request.form['teacher_id'])
+            course.meeting_time = request.form['meeting_time']  # Update meeting time
             db.session.commit()
             flash('Course updated successfully.')
             return redirect(url_for('admin_courses'))
         return render_template('admin/edit_course.html', course=course, teachers=teachers)
+
 
     # Delete a course
     @app.route('/admin/courses/delete/<int:course_id>', methods=['POST'])
