@@ -2,11 +2,13 @@
 
 {% block content %}
 <h1>Your Classes</h1>
-<ul>
-    {% for course in courses %}
-        <li>
-            <a href="{{ url_for('teacher_students', course_id=course.id) }}">{{ course.name }}</a> - Capacity: {{ course.capacity }} - Enrolled: {{ course.enrollments.count() }}
-        </li>
-    {% endfor %}
-</ul>
+<table class="course-table">
+    <tr>
+        {% for course in courses %}
+            <td>
+                <a href="{{ url_for('teacher_students', course_id=course.id) }}">{{ course.name }}</a> - Capacity: {{ course.capacity }} - Enrolled: {{ course.enrollments.count() }}
+            </td>
+        {% endfor %}
+    </tr>
+</table>
 {% endblock %}
