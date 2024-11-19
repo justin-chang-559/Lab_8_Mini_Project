@@ -33,6 +33,9 @@ def init_routes(app):
             return redirect(url_for('teacher_classes'))
         elif current_user.role == 'admin':
             return redirect(url_for('admin_dashboard'))
+        else:
+            flash('Unknown user role.')
+            return redirect(url_for('logout'))
 
     @app.route('/student/courses')
     @login_required
@@ -298,16 +301,19 @@ def init_routes(app):
         if request.method == 'POST':
             username = request.form['username']
             password = request.form['password']
+            email = request.form['email']
             role = request.form['role']  # 'student' or 'teacher'
             
             # Check if username already exists
-            existing_user = User.query.filter_by(username=username).first()
+            existing_user = User.query.filter(
+                (User.username==username) | (User.email==email)
+                ).first()
             if existing_user:
                 flash('Username already exists.')
                 return redirect(url_for('signup'))
 
             # Create a new user
-            new_user = User(username=username, role=role)
+            new_user = User(username=username, email=email, role=role)
             new_user.set_password(password)  # Securely set hashed password
             db.session.add(new_user)
             db.session.commit()
