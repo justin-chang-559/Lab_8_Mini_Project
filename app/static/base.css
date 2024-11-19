@@ -35,7 +35,7 @@ header {
 
 header nav {
     max-width: 1200px;
-    margin: 0 auto;
+    /* margin: 0 auto; */
     padding: 0 1rem;
     display: flex;
     justify-content: space-between;
@@ -196,6 +196,13 @@ button:disabled,
     border-bottom: 2px solid #e5e7eb;
 }
 
+.main-content {
+    width: 95%;
+    margin: 0 auto;
+    padding: 1rem;
+    background-color: #f9f9f9;
+}
+
 /* Alert messages */
 .alert {
     padding: 1rem 1.5rem;
@@ -252,6 +259,11 @@ a:hover {
     text-decoration: underline;
 }
 
+ul {
+    list-style-type: none;
+    text-align: left;
+}
+
 /* Utilities */
 .text-center { text-align: center; }
 .mt-4 { margin-top: 1rem; }
@@ -285,4 +297,14 @@ a:hover {
 
 .action-button.delete:hover {
     background-color: #8a3b36;
+}
+
+.flashes {
+    background-color: #f4f4f4;
+    border: 1px solid #bdcedf;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 20px 0;
+    list-style: none;
+    box-shadow: 0 4px 6px rgba(205, 212, 241);
 }
