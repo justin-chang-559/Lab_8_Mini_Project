@@ -2,10 +2,13 @@
 
 {% block content %}
   <h1>Your Courses</h1>
-  <ul>
-    {% for course in courses %}
-      <li>{{ course.name }}</li>
-    {% endfor %}
-  </ul>
+  <table>
+    <tr>
+      {% for course in courses %}
+        <td>{{ course.name }}</td>
+      {% endfor %}
+    </tr>
+  </table>
+
   <a href="{{ url_for('student_enroll') }}">Enroll in a Course</a>
 {% endblock %}
